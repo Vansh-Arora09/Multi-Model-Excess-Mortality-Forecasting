@@ -1,5 +1,6 @@
-# Multi-Model-Excess-Mortality-Forecasting
-🩺 Multi-Model Excess Mortality Forecasting
+
+#🩺 Multi-Model Excess Mortality Forecasting
+
 🎯 Project Overview
 This project develops a robust Machine Learning pipeline to forecast potentially excess mortality rates across the United States. Utilizing granular public health data from the National Center for Health Statistics (NCHS), the goal is to identify and quantify the impact of key temporal, geographic, and demographic factors (e.g., State, Age Range, Cause of Death) on mortality gaps.The final deliverable is a production-ready system featuring a comparative analysis of multiple ML models and a live interactive dashboard for data-driven public health strategy and visualization.
 
