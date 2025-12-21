@@ -1,9 +1,11 @@
 # 🩺 PulsePredict: Mortality Trend Analysis & Predictive Intelligence
+
 <p align="center">
   <img src="diagnosis_verdict.jpg" alt="PulsePredict Diagnostic Verdict" width="800">
 </p>
+
 # 📌 Project Overview
-PulsePredict is an end-to-end data science solution designed to analyze and predict Potentially Excess Deaths across the United States. Using CDC public health data from 2005 to 2015, the project identifies the gap between observed and expected mortality rates to pinpoint areas requiring urgent health intervention.
+    PulsePredict is an end-to-end data science solution designed to analyze and predict Potentially Excess Deaths across the United States. Using CDC public health data from 2005 to           2015, the project identifies the gap between observed and expected mortality rates to pinpoint areas requiring urgent health intervention.
 
 
 # 🛠️ Technical Workflow
