@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -70,19 +70,18 @@ def predictor_pipeline(raw_input_df):
     
     prediction_proba = rfc_final.predict_proba(X_final)[0]
     
-    # 2. Get the Top 1 (Your original return values)
     prediction_encoded = prediction_proba.argmax()
     predicted_label = lb.inverse_transform([prediction_encoded])[0]
     confidence = prediction_proba.max()
     
-    # 3. Create the Top 3 Dataframe for the chart
+    
     prob_df = pd.DataFrame({
         'Cause': lb.classes_,
         'Probability': prediction_proba
     }).sort_values(by='Probability', ascending=False).head(3)
     
     return predicted_label, confidence, prob_df
-    # --- NEW LOGIC END ---
+    
 
 import plotly.graph_objects as go
 
@@ -123,12 +122,9 @@ import plotly.express as px
 def probability_chart(top_3_df):
     df = top_3_df.sort_values(by='Probability', ascending=True)
     
-    # Define the colors
-    # Winner: Emerald, Runners up: Sky Blue
     bar_colors = ['#0369A1'] * len(df) 
     bar_colors[-1] = '#059669' 
     
-    # Border colors (The "Shading"): Deep Blue and Deep Green
     border_colors = ['#0369A1'] * len(df)
     border_colors[-1] = '#059669'
 
@@ -142,13 +138,11 @@ def probability_chart(top_3_df):
     
     fig.update_traces(
         marker_color=bar_colors,
-        marker_line_color=border_colors, # Dark "shading" border
-        marker_line_width=2.5,           # Thick enough to look like a shadow/frame
+        marker_line_color=border_colors, 
+        marker_line_width=2.5,      
         opacity=1.0,
-        width=0.7,                       # Slightly thicker bars
-        # Shallow rounding (reduced from 10 to 4)
+        width=0.7,                       
         marker_cornerradius=9,           
-        # Formatting the Percentage text inside/outside bars
         textfont=dict(size=14, color="#FFFFFF", family="Arial Black"), 
         textposition='auto'
     )
@@ -161,7 +155,6 @@ def probability_chart(top_3_df):
         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         yaxis=dict(
             showgrid=False, 
-            # Bolder text for the Cause names
             tickfont=dict(size=14, color="#034977", family="Arial Black"),
             title=""
         )
@@ -349,20 +342,15 @@ if st.sidebar.button('**Generate Prediction**'):
     
     with st.spinner('🧠 PulsePredict AI is analyzing health drivers...'):
         try:
-            # 1. Get the 3 return values from your updated pipeline
             predicted_cause, confidence, top_3_df = predictor_pipeline(input_data)
             
-            # 2. Top Section: Gauge and Result Box
             res_col1, res_col2 = st.columns([1, 1])
             
             with res_col1:
-                # Gauge Chart (Risk Meter)
+                
                 st.plotly_chart(risk_gauge(confidence), use_container_width=True)
             
             with res_col2:
-                
-                #st.markdown("### Forecasted Primary Cause")
-                # ECG Heartbeat Line + Animated Result Box
                 st.markdown("""
                     <div class="ecg-container">
                         <div class="heartbeat-line"></div>
@@ -374,21 +362,16 @@ if st.sidebar.button('**Generate Prediction**'):
                     unsafe_allow_html=True
                 )
                 
-                # Confidence Metric
-                #st.metric(label="Model Certainty", value=f"{confidence:.1%}")
-
-            # 3. Middle Section: Distribution Chart
             st.markdown("---")
             st.subheader("📊 Primary Risk Distribution")
 
-            # Display the new sleek Plotly chart
             st.plotly_chart(probability_chart(top_3_df), use_container_width=True)
             importances = rfc_final.feature_importances_
             feat_importances = pd.Series(importances, index=OHE_TRAINING_COLUMNS)
             top_contributor = feat_importances.idxmax()
 
             st.info(f"🔍 **Primary Driver:** The model's decision was most influenced by **{top_contributor}**.")
-            # 4. Confidence Messaging
+            
             if confidence > 0.80:
                 st.success("✅ **High Confidence:** The model is very certain about this trend.")
             elif confidence > 0.50:
@@ -396,12 +379,10 @@ if st.sidebar.button('**Generate Prediction**'):
             else:
                 st.warning("⚠️ **Low Confidence:** Interpret this result with caution.")
 
-            # 5. Bottom Section: Data Audit
             with st.expander("🔍 View Feature Analysis"):
                 st.markdown('<p class="audit-header">Patient Health Driver Audit</p>', unsafe_allow_html=True)
                 st.write("Detailed breakdown of inputs processed by PulsePredict AI:")
                 
-                # We style the dataframe columns to have a specific color theme
                 styled_df = input_data.T.style.set_properties(**{
                     'background-color': '#F0F9FF',
                     'color': '#001219',
@@ -489,19 +470,17 @@ def predictor_pipeline(raw_input_df):
     
     prediction_proba = rfc_final.predict_proba(X_final)[0]
     
-    # 2. Get the Top 1 (Your original return values)
     prediction_encoded = prediction_proba.argmax()
     predicted_label = lb.inverse_transform([prediction_encoded])[0]
     confidence = prediction_proba.max()
     
-    # 3. Create the Top 3 Dataframe for the chart
     prob_df = pd.DataFrame({
         'Cause': lb.classes_,
         'Probability': prediction_proba
     }).sort_values(by='Probability', ascending=False).head(3)
     
     return predicted_label, confidence, prob_df
-    # --- NEW LOGIC END ---
+    
 
 import plotly.graph_objects as go
 
@@ -542,12 +521,11 @@ import plotly.express as px
 def probability_chart(top_3_df):
     df = top_3_df.sort_values(by='Probability', ascending=True)
     
-    # Define the colors
-    # Winner: Emerald, Runners up: Sky Blue
+    
     bar_colors = ['#0369A1'] * len(df) 
     bar_colors[-1] = '#059669' 
     
-    # Border colors (The "Shading"): Deep Blue and Deep Green
+    
     border_colors = ['#0369A1'] * len(df)
     border_colors[-1] = '#059669'
 
@@ -561,13 +539,11 @@ def probability_chart(top_3_df):
     
     fig.update_traces(
         marker_color=bar_colors,
-        marker_line_color=border_colors, # Dark "shading" border
-        marker_line_width=2.5,           # Thick enough to look like a shadow/frame
+        marker_line_color=border_colors,
+        marker_line_width=2.5,       
         opacity=1.0,
-        width=0.7,                       # Slightly thicker bars
-        # Shallow rounding (reduced from 10 to 4)
+        width=0.7,                     
         marker_cornerradius=9,           
-        # Formatting the Percentage text inside/outside bars
         textfont=dict(size=14, color="#FFFFFF", family="Arial Black"), 
         textposition='auto'
     )
@@ -580,7 +556,6 @@ def probability_chart(top_3_df):
         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         yaxis=dict(
             showgrid=False, 
-            # Bolder text for the Cause names
             tickfont=dict(size=14, color="#034977", family="Arial Black"),
             title=""
         )
@@ -768,20 +743,17 @@ if st.sidebar.button('**Generate Prediction**'):
     
     with st.spinner('🧠 PulsePredict AI is analyzing health drivers...'):
         try:
-            # 1. Get the 3 return values from your updated pipeline
+           
             predicted_cause, confidence, top_3_df = predictor_pipeline(input_data)
             
-            # 2. Top Section: Gauge and Result Box
             res_col1, res_col2 = st.columns([1, 1])
             
             with res_col1:
-                # Gauge Chart (Risk Meter)
+                
                 st.plotly_chart(risk_gauge(confidence), use_container_width=True)
             
             with res_col2:
                 
-                #st.markdown("### Forecasted Primary Cause")
-                # ECG Heartbeat Line + Animated Result Box
                 st.markdown("""
                     <div class="ecg-container">
                         <div class="heartbeat-line"></div>
@@ -793,21 +765,17 @@ if st.sidebar.button('**Generate Prediction**'):
                     unsafe_allow_html=True
                 )
                 
-                # Confidence Metric
-                #st.metric(label="Model Certainty", value=f"{confidence:.1%}")
-
-            # 3. Middle Section: Distribution Chart
             st.markdown("---")
             st.subheader("📊 Primary Risk Distribution")
 
-            # Display the new sleek Plotly chart
+            
             st.plotly_chart(probability_chart(top_3_df), use_container_width=True)
             importances = rfc_final.feature_importances_
             feat_importances = pd.Series(importances, index=OHE_TRAINING_COLUMNS)
             top_contributor = feat_importances.idxmax()
 
             st.info(f"🔍 **Primary Driver:** The model's decision was most influenced by **{top_contributor}**.")
-            # 4. Confidence Messaging
+           
             if confidence > 0.80:
                 st.success("✅ **High Confidence:** The model is very certain about this trend.")
             elif confidence > 0.50:
@@ -815,12 +783,12 @@ if st.sidebar.button('**Generate Prediction**'):
             else:
                 st.warning("⚠️ **Low Confidence:** Interpret this result with caution.")
 
-            # 5. Bottom Section: Data Audit
+           
             with st.expander("🔍 View Feature Analysis"):
                 st.markdown('<p class="audit-header">Patient Health Driver Audit</p>', unsafe_allow_html=True)
                 st.write("Detailed breakdown of inputs processed by PulsePredict AI:")
                 
-                # We style the dataframe columns to have a specific color theme
+                
                 styled_df = input_data.T.style.set_properties(**{
                     'background-color': '#F0F9FF',
                     'color': '#001219',
@@ -836,5 +804,4 @@ if st.sidebar.button('**Generate Prediction**'):
                         
         except Exception as e:
             st.error(f"❌ **Prediction Error:** {e}")
->>>>>>> 2f544c9baf89db3006d3ddf8297720aaf9bfb217
             st.info("💡 **Troubleshooting:** Ensure all 6 `.joblib` files are loaded.")
