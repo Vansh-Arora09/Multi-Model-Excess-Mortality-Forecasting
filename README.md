@@ -20,7 +20,7 @@
     3. Feature Engineering
         3.1 Excess Metric Calculation: Derived the key target variable:
                     Potentially Excess Deaths = Observed Deaths - Expected Deaths
-        3.2 Correlation Mapping: Built a heatmap to identify the strong 0.90 correlation between Observed and Potentially Excess Deaths, ensuring model focus remained on high-impact                 variables.
+        3.2 Correlation Mapping: Built a heatmap to identify the strong 0.90 correlation between Observed and Potentially Excess Deaths, ensuring model focus remained on high-impact variables.
     4. Machine Learning & Interface
         4.1 Model Goal: Predict the "Diagnostic Verdict" (Leading Cause of Death) based on regional population and historical benchmarks.
         4.2 Deployment: Created an interactive UI for real-time mortality risk assessment.
