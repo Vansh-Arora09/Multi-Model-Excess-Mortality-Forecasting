@@ -27,7 +27,7 @@
 
 
 # 📊 Key Insights
-        The Population Paradox: While population and observed deaths are highly correlated 0.72, the "Percent Excess" varies wildly, suggesting that healthcare quality—not just                         population size—is a major factor in mortality.
+        The Population Paradox: While population and observed deaths are highly correlated 0.72, the "Percent Excess" varies wildly, suggesting that healthcare quality—not just population size—is a major factor in mortality.
         Trend Divergence: Since 2010, the gap between observed and expected deaths has widened in specific HHS regions, indicating a need for targeted public health policy.
 
 
